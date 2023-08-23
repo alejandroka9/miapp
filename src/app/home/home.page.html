@@ -1,20 +1,24 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Blank
-    </ion-title>
-  </ion-toolbar>
-</ion-header>
-
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
-    </ion-toolbar>
-  </ion-header>
-
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
+<ion-content [fullscreen]="true" class="custom-content">
+  <div class="ion-text-center">
+    <ion-card>
+      <img alt="Silhouette of mountains" src="assets/img/imagennunu.jpg">
+      <ion-card-header>
+        <ion-card-title>Bienvenido a la app :D</ion-card-title>
+      </ion-card-header>
+      
+      <ion-card-content>
+        Prueba primera app 
+      </ion-card-content>
+      
+      <div class="ion-padding">
+        <ion-button routerLink="/login" expand="full">Iniciar sesión</ion-button>
+      </div>
+    </ion-card>
   </div>
 </ion-content>
+
+
+
+
+
+
