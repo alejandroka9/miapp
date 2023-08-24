@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { AlertController, NavController } from '@ionic/angular';
+import { NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-registro',
@@ -9,21 +9,33 @@ import { AlertController, NavController } from '@ionic/angular';
 export class RegistroPage {
   username: string = '';
   password: string = '';
+  fechaNacimiento: string = '';
+  nivelEducacional: string = '';
 
   constructor(private navCtrl: NavController) {}
 
   registrar() {
-    if (this.username && this.password) {
+    if (this.username && this.password && this.fechaNacimiento && this.nivelEducacional) {
       const user = {
         username: this.username,
-        password: this.password
+        password: this.password,
+        fechaNacimiento: this.fechaNacimiento,
+        nivelEducacional: this.nivelEducacional
       };
 
       localStorage.setItem('usuario', JSON.stringify(user));
-      this.navCtrl.navigateForward('/home');
       console.log('Registro exitoso:', user);
+
+      this.navCtrl.navigateForward('/home'); // Redirige al usuario a la página de inicio
     } else {
       console.log('Por favor ingresa todos los campos requeridos.');
     }
+  }
+
+  limpiarCampos() {
+    this.username = '';
+    this.password = '';
+    this.fechaNacimiento = '';
+    this.nivelEducacional = '';
   }
 }
