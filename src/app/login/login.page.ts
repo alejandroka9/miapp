@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
-import { AlertController, NavController } from '@ionic/angular';
+import { NavController, AlertController } from '@ionic/angular';
 
 @Component({
   selector: 'app-login',
-  templateUrl: 'login.page.html',
-  styleUrls: ['login.page.scss'],
+  templateUrl: './login.page.html',
+  styleUrls: ['./login.page.scss'],
 })
 export class LoginPage {
 
@@ -14,8 +14,17 @@ export class LoginPage {
   constructor(private navCtrl: NavController, private alertController: AlertController) {}
 
   async login() {
-    if (this.username === 'manuel' && this.password === '1234') {
-      this.navCtrl.navigateForward('/login2'); 
+    const storedUser = localStorage.getItem('usuario');
+
+    if (storedUser) {
+      const parsedUser = JSON.parse(storedUser);
+
+      if (this.username === parsedUser.username && this.password === parsedUser.password) {
+        this.navCtrl.navigateForward('/login2'); 
+      } else {
+        await this.presentAlert();
+        this.navCtrl.navigateForward('/home');
+      }
     } else {
       await this.presentAlert();
       this.navCtrl.navigateForward('');
@@ -32,4 +41,3 @@ export class LoginPage {
     await alert.present();
   }
 }
-

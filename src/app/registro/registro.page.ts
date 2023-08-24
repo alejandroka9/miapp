@@ -1,37 +1,29 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router'; // Importa el Router
+import { Component } from '@angular/core';
+import { AlertController, NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-registro',
   templateUrl: './registro.page.html',
   styleUrls: ['./registro.page.scss'],
 })
-export class RegistroPage implements OnInit {
-  usuario = {
-    nombreUsuario: '',
-    contrasena: ''
-  };
+export class RegistroPage {
+  username: string = '';
+  password: string = '';
 
-  usuariosRegistrados: any[] = []; // Lista de usuarios registrados
+  constructor(private navCtrl: NavController) {}
 
-  constructor(private router: Router) { } // Inyecta el Router
+  registrar() {
+    if (this.username && this.password) {
+      const user = {
+        username: this.username,
+        password: this.password
+      };
 
-  ngOnInit() {
-  }
-
-  registrarUsuario() {
-    // Verificar si el usuario ya está registrado por su nombre de usuario
-    const usuarioExistente = this.usuariosRegistrados.find(u => u.nombreUsuario === this.usuario.nombreUsuario);
-    
-    if (usuarioExistente) {
-      console.log('El nombre de usuario ya está en uso.');
+      localStorage.setItem('usuario', JSON.stringify(user));
+      this.navCtrl.navigateForward('/home');
+      console.log('Registro exitoso:', user);
     } else {
-      // Agregar el usuario a la lista de usuarios registrados
-      this.usuariosRegistrados.push({...this.usuario});
-      console.log('Usuario registrado:', this.usuario);
-
-      // Redirigir al usuario a la página de inicio
-      this.router.navigate(['/home']);
+      console.log('Por favor ingresa todos los campos requeridos.');
     }
   }
 }
